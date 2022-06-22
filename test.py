@@ -1,1 +1,1 @@
-print("Git works")
+print("Git works with VSCode.")
