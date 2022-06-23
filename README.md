@@ -33,21 +33,18 @@ Rural-urban classifications (US) investigated in this project include:
 
 **OMB (Office of Management and Budget)**
 
-*codes:*
-
+*codes:*  
 Metro area – Urban core of 50,000 or more people
 Micro area  – Urban core of 10,000-49,9999 people
 Rural area – Counties outside of metro or micro areas
 
-*notes:*
-
+*notes:*  
 OMB classification is known to underrepresent rural areas. The data file used classified areas using a basic FIPS code (i.e. at the county level).
 
 
 **NCHS (National Center for Health Statistics)**
 
-*codes:*
-
+*codes:*  
 Large central metro – Counties in MSAs (metropolitan statistical areas) of 1 million or more population that: 1. Contain the entire population of the largest principal city of the MSA, or 2. Have their entire population contained in the largest principal city of the MSA, or 3. Contain at least 250,000 inhabitants of any principal city of the MSA.
 Large fringe metro – Counties in MSAs of 1 million or more population that did not qualify as large central metro counties.
 Medium metro – Counties in MSAs of populations of 250,000 to 999,999.
@@ -55,22 +52,19 @@ Small metro – Counties in MSAs of populations less than 250,000.
 Micropolitan – Counties in micropolitan statistical areas.
 Noncore = Nonmetropolitan counties that did not qualify as micropolitan.
 
-*classification:*
-
+*classification:*  
 In order to collapse these codes into useable categories, we further defined NCHS codes in this way:
 1-4 = "metro"
 5 = "micro"
 6 = "rural"
 
-*notes:*
-
+*notes:*  
 This classification was developed for health stastistical purposes so it may be particularly useful for this project; however, previous studies usually used it for research that assessed health outcomes based on access to services such as hospitals. As such, we must consider the distinction between social behaviours and health outcomes when considering how level of rurality may affect driving patterns (i.e. rather than trying to predict health outcomes based on rural/urban access to health services, we are trying to predict driving behaviours based on rural/urban location of residence). The data file used classified areas using a basic FIPS code (i.e. at the county level).
 
 
 **UIC (Urban Influence Codes)**
 
-*codes:*
-
+*codes:*  
 1 – In large metro area of 1+ million residents
 2 – In small metro area of less than 1 million residents
 3 – Micropolitan adjacent to large metro
@@ -84,21 +78,18 @@ This classification was developed for health stastistical purposes so it may be 
 11 – Non-core not adjacent to metro or micro with own town
 12 – Non-core not adjacent to metro or micro with no town
 
-*classification:*
-
+*classification:*  
 In order to collapse these codes into useable categories, we further defined UIC codes in this way:
 1-2 = "metro"
 3-8 = "micro"
 9-12 = "rural"
 
-*notes:*
-
+*notes:*  
 This classification is intended to distinguish metropolitan counties by population size of their metro area, and nonmetropolitan counties by size of the largest city or town and proximity to metro and micropolitan areas. The data file used classified areas using a basic FIPS code (i.e. at the county level).
 
 **RUCC (Rural-Urban Continuum Codes)**
 
-*codes:*
-
+*codes:*  
 1 – Counties in metro areas of 1 million population or more
 2 – Counties in metro areas of 250,000 to 1 million population
 3 – Counties in metro areas of fewer than 250,000 population
@@ -111,22 +102,19 @@ This classification is intended to distinguish metropolitan counties by populati
 88 – Unknown-Alaska/Hawaii State/not official USDA Rural-Urban Continuum code
 99 – Unknown/not official USDA Rural-Urban Continuum code
 
-*classification:*
-
+*classification:*  
 In order to collapse these codes into useable categories, we further defined UIC codes in this way:
 1-3 = "metro"
 4-7 = "micro"
 8-9 = "rural"
 
-*notes:*
-
+*notes:*  
 This classification is intended to distinguish metropolitan counties by the population size of their metro area, and nonmetropolitan counties by degree of urbanization and adjacency to a metro area. The data file used classified areas using a basic FIPS code (i.e. at the county level).
 
 
 **RUCA (Rural-Urban Commuting Codes)**
 
-*codes:*
-
+*codes:*  
 1	– Metropolitan area core: primary flow within an urbanized area (UA)
 2	– Metropolitan area high commuting: primary flow 30% or more to a UA
 3	– Metropolitan area low commuting: primary flow 10% to 30% to a UA
@@ -139,15 +127,13 @@ This classification is intended to distinguish metropolitan counties by the popu
 10 – Rural areas: primary flow to a tract outside a UA or UC
 99 – Not coded: Census tract has zero population and no rural-urban identifier information
 
-*classification:*
-
+*classification:*  
 In order to collapse these codes into useable categories, we further defined UIC codes in this way:
 1-3 = "metro"
 4-6 = "micro"
 7-10 = "rural"
 
-*notes:*
-
+*notes:*  
 This classification takes into account measures of population density, urbanization, and daily commuting. Since it classifies areas at the census tract level, it is more precise in addition to considering commuting flows rather than just population or adjacency to urban areas. The data files used classified areas using ZIP code and a state-county-tract FIPS code (i.e. at the census tract level), respectively. For any areas that were classified differently between the two comparison files, the file using the state-county-tract FIPS code was used since it is more precise.
 
 
