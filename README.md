@@ -103,7 +103,7 @@ This classification is intended to distinguish metropolitan counties by populati
 99 – Unknown/not official USDA Rural-Urban Continuum code  
 
 *classification:*  
-In order to collapse these codes into useable categories, we further defined UIC codes in this way:
+In order to collapse these codes into useable categories, we further defined RUCC codes in this way:  
 1-3 = "metro"  
 4-7 = "micro"  
 8-9 = "rural"  
@@ -128,7 +128,7 @@ This classification is intended to distinguish metropolitan counties by the popu
 99 – Not coded: Census tract has zero population and no rural-urban identifier information  
 
 *classification:*  
-In order to collapse these codes into useable categories, we further defined UIC codes in this way:  
+In order to collapse these codes into useable categories, we further defined RUCA codes in this way:    
 1-3 = "metro"  
 4-6 = "micro"  
 7-10 = "rural"  
