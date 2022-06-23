@@ -1,0 +1,37 @@
+uid (1): unique ID for each individual participating in the study
+
+lat (2): latitude of participant's home location, determined by scikit-mobility function 'home_location' based on driving GPS data
+
+lng (3): longitude of participant's home location, determined by scikit-mobility function 'home_location' based on driving GPS data
+
+address (4): home address of participant, determined by Google API based on lat/lng
+
+ZIP (5): home zip code, extracted from participant's home address
+
+city/census region (6): home city/town or 'census region', extracted from participant's home address
+
+county (7): home county, determined by FCC's Block API  based on lat/lng
+
+state (8): home state, extracted from GeoNames API based on lat/lng
+
+state (abbreviation) (9): abbreviation of home state, extracted from participant's home address
+
+FIPS (state-county-tract) (10): FIPS code with precision of 10-11 digits, i.e. including state, county, and census tract codes, determined by GeoNames API  based on lat/lng
+
+neighbourhood (from GeoNames API) (12): home neighbourhood, determined by GeoNames API based on lat/lng
+
+ZIP (from Nominatim) (13): home zip code, determined by Nominatim based on lat/lng
+
+county (from Nominatim) (14): home county, determined by Nominatim based on lat/lng
+
+
+NOTES:
+Scikit-mobility function 'home_location' takes the input of end latitude, longitude, and time of all trips and returns the latitude and longitude of each individual's home location, determined as the most common latitude/longitude that each participant returns to at night (between 10PM and 7AM).
+
+Google API take the input of participant's home coordinates (lat, lng) and returns full home address.
+
+GeoNames API take the input of participant's home coordinates (lat, lng) and returns neighborhood, city, country, and latitude/longitude coordinates (not necessarily identical to the coordinates given).
+
+Federal Communications Commission (FCC)'s Block API takes the input of participant's home location (lat, lng) and returns county, state, FIPS code, etc.
+
+Nominatim, part of the Geopy library, takes the input of participant's home location (lat, lng) and returns an address including county, state, zip code, country, and latitude/longitude coordinates (not necessarily identical to the coordinates given).

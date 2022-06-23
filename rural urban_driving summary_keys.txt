@@ -1,0 +1,13 @@
+rural urban_driving summary_main
+
+keys: uid, overall RU code, no. trips, avg. distance travelled, avg. daylight ratio, average MIN speed, average MAX speed, average AVG speed, average MIN acceleration, average MAX acceleration, average AVG acceleration, average MIN jerk, average MAX jerk, average AVG jerk, avg. no. hard braking/trip, avg. no. hard accel/trip, avg. no. speeding/trip, avg. duration, most frequently travelled month, most frequently travelled day, most frequently travelled hour
+
+
+ruralurban_driving summary_NC
+
+keys: uid, overall RU code, no. trips, no. unique locations, avg. distance from PrimeLoc (km), avg. daylight ratio, avg. no. braking/trip, avg. no. accel/trip, avg. no. speeding/trip, avg. no. aggr/trip, most frequently travelled month, most frequently travelled day
+
+
+ruralurban_driving summary_overall
+
+keys: uid, overall RU code, avg. daylight ratio, avg. no. hard braking/trip, avg. no. hard accel/trip, avg. no. speeding/trip, most frequently travelled month, most frequently travelled day
