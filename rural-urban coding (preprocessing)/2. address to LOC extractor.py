@@ -5,8 +5,8 @@ import requests
 import geopy
 from geopy.geocoders import GeoNames
 
-geo = GeoNames(username='maria.jl')
-geo_nominatim = geopy.Nominatim(user_agent='1234')
+geo = GeoNames(username='xxxx')
+geo_nominatim = geopy.Nominatim(user_agent='xxxx')
 
 loc_data = pd.read_csv(r'C:\Users\maria\OneDrive\Documents\RESEARCH\Data files\participant home addresses.csv')
 
@@ -98,7 +98,9 @@ def GeoNamesinfo ():
     The GeoNames library from Geopy must be previously imported as "geo".
 
     NOTE: the geolocator (interestingly) also returns a latitude and longitude
-    which seem to be slightly different from the latitude and longitude provided.
+    which seem to be slightly different from the latitude and longitude provided. This
+    may be a result of locating a geographical 'object' from which it determines location
+    information, and also suggests some imprecision in the determined information.
 
     '''
 
@@ -145,10 +147,8 @@ def Nominatiminfo ():
 for i in range(len(loc_data)):      ### for each row, or participant,
     lat = loc_data.iloc[i, 1]       ## extract their home location (in lat, long)
     long = loc_data.iloc[i, 2]
-
-    if lat == 0:                     ## if participant's home location was undetermined by skmob
-        loc_data.iloc[i, 1:] = 'N/A'     # then make all location information = NaN
-    else:
+    
+    try:
         address = loc_data.iloc[i, 3].split(", ")
 
         state_zip = extract_state_zip()
@@ -166,6 +166,8 @@ for i in range(len(loc_data)):      ### for each row, or participant,
         loc_data.iloc[i, 12] = ZIP_county[0] # ZIP (from Nominatim, using lat/long)
         loc_data.iloc[i, 13] = ZIP_county[1] # county (from Nominatim, using lat/long)
 
+    except AttributeError:            ## if participant's home location is missing ('address' cannot be split)
+        loc_data.iloc[i, 1:] = 'N/A'   ## then make all location information = NaN
 
 ## ensures all words in county name are capitalized, e.g. St. Louis city --> St. Louis City
 for i in range(len(loc_data)):
