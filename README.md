@@ -14,8 +14,8 @@ With this objective in mind, this project repository is divided into three main 
 
 **driving correlations (preprocessing)**
 
-5. rural urban_driving summary (driving data --> overall driving summaries for each participant, where each row has participant uid, overall RU code, and the values for various overall driving behaviours)  
-5a. skmob attribute finder (driving data --> skmob-obtained driving summaries, e.g. no. unique locations and radius of gyration)  
+5. rural urban_driving summary (driving data --> overall driving summaries for each participant, where each row has participant uid, overall RU code, and the values for various overall driving behaviours)
+5. [a] skmob attribute finder (driving data --> skmob-obtained driving summaries, e.g. no. unique locations and radius of gyration)  
 6. rural urban_driving correlations (rural urban_driving summary --> plots of possible RU/driving correlations)  
 
 **driving correlations (machine learning)**  
@@ -23,7 +23,7 @@ With this objective in mind, this project repository is divided into three main 
 7. rural urban_driving MODELS (rural urban_driving correlations --> machine learning models that attempt to predict an individual's class (rural, urban) from their overall driving patterns)
 
 
-NOTE: Most of these Python files flow directly from one another (e.g. the address file generated in step <1> is directly used in step <2>, without any processing in between). However, a few steps required manual processing: namely, the choice of version of homelocationfinder in <2>, the manual creation of the "overall RU code" column in 'participant _ruralurbancodes.csv' based on "RUCA_ru" and "other_ru" columns, and the addition of skmob driving summaries from 'ruralurban_skmob summary.csv' to 'ruralurban_driving summary.csv' prior to visualizations in <6>.
+**NOTE:** Most of these Python files flow directly from one another (e.g. the address file generated in step <1> is directly used in step <2>, without any processing in between). However, a few steps required manual processing: namely, the choice of version of homelocationfinder in <2>, the manual creation of the "overall RU code" column in 'participant _ruralurbancodes.csv' based on "RUCA_ru" and "other_ru" columns, and the addition of skmob driving summaries from 'ruralurban_skmob summary.csv' to 'ruralurban_driving summary.csv' prior to visualizations in <6>.
 
 ## Data
 
@@ -152,4 +152,4 @@ In this project, like many other research studies, I defined metro and micro cla
 
 *overall (8R)* --- As the ultimate classification chosen for this project, a binary code of rural or urban was assigned to each participant based on firstly RUCA_ru and secondly other_ru (since RUCA codes are based on smaller/more precise locations as well as encompass a perhaps wider and more encompassing definition of rurality and urbanicity). In other words, for most participants where RUCA_ru and other_ru did not match, RUCA_ru was chosen as the code; except for one case where the RUCA code was one point away from being categorized into the opposite class, in which case the other_ru was chosen as the code. 
 
-NOTE: R represents the number of participants classified as rural, within the main/STL dataset of 246 participants with driving data.
+**NOTE:** R represents the number of participants classified as rural, within the main/STL dataset of 246 participants with driving data.
