@@ -87,7 +87,7 @@ def findRUCAcode (end_col):
 
     global FIPS1  ## addresses error "UnboundLocalError: local variable 'FIPS1' referenced before assignment"
 
-    for iteration in range(2):
+    for iteration in range(2): 
         try:
             row2 = RUCA2[RUCA2["State-County-Tract FIPS Code"] == np.int64(FIPS1)]
             RUdata.iloc[i, end_col] = row2.iloc[0, 4] 
@@ -103,12 +103,41 @@ def findRUCAcode (end_col):
 
                 else:
                     if iteration == 0:
-                        FIPS1 = np.int64(input(f"Please search for {locdata.iloc[i, 3]} at http://www.ffiec.gov/Geocode/ and return the full FIPS code (add state, county, and tract codes together without any spaces or decimal points). "))
-                        ## try once to search for FIPS using the provided website, in case the FIPS provided by the API was slightly different/inaccurate
-                
-            except IndexError: # accounts for error if row with rounded FIPS does not exist
+                        try:
+                            FIPS1 = np.int64(input(f"Please search for {locdata.iloc[i, 3]} at http://www.ffiec.gov/Geocode/ and return the full FIPS code (add state, county, and tract codes together without any spaces or decimal points). If no FIPS can be found or you would like to skip this step, please enter '404': "))
+                            ## try once to search for FIPS using the provided website, in case the FIPS provided by the API was slightly different/inaccurate
+
+                            if FIPS1 == 404: ## 404 = break code; if the numbers 404 are inputted, indicating that the FIPS code cannot manually be found or the user wants
+                                break        ## to avoid this step, the program will stop searching for the corresponding RUCA code (avoid second iteration of the 'for' loop)
+
+                            while len(str(FIPS1)) != 11:  ## catches error if part of FIPS code is missed
+                                FIPS1 = np.int64(input(f"This FIPS code is not the correct length. Please check that the FIPS code is inputted correctly according to the above syntax, and input it again: "))
+
+                        except ValueError: ## catches error if the FIPS code is not inputted as a number
+                            FIPS1 = np.int64(input(f"You did not input a number. Please check that the FIPS code is inputted correctly according to the above syntax, and input it again. If no FIPS can be found or you would like to skip this step, please enter '404': "))
+
+                            if FIPS1 == 404:   
+                                break
+
+            except IndexError: # accounts for error if row with rounded FIPS does not exist; identical to 'else' block above
                 if iteration == 0:
-                    FIPS1 = np.int64(input(f"Please search for {locdata.iloc[i, 3]} at http://www.ffiec.gov/Geocode/ and return the full FIPS code (add state, county, and tract codes together without any spaces or decimal points). ")) ## in the case where the row was not found, the code will skip the else block so we put the user prompt here
+                    try:
+                        FIPS1 = np.int64(input(f"Please search for {locdata.iloc[i, 3]} at http://www.ffiec.gov/Geocode/ and return the full FIPS code (add state, county, and tract codes together without any spaces or decimal points). If no FIPS can be found or you would like to skip this step, enter '404': "))
+                        ## try once to search for FIPS using the provided website, in case the FIPS provided by the API was slightly different/inaccurate
+
+                        if FIPS1 == 404:
+                            break
+
+                        while len(str(FIPS1)) != 11:  ## catches error if part of FIPS code is missed
+                            FIPS1 = np.int64(input(f"This FIPS code is not the correct length. Please check that the FIPS code is inputted correctly according to the above syntax, and input it again: "))
+
+                    except ValueError: ## catches if the FIPS code is not inputted as a number
+                        FIPS1 = np.int64(input(f"You did not input a number. Please check that the FIPS code is inputted correctly according to the above syntax, and input it again. If no FIPS can be found, enter '404': "))
+                    
+                        if FIPS1 == 404:
+                                break
+                        elif len(str(FIPS1)) != 11:
+                                FIPS1 = np.int64(input(f"This FIPS code is not the correct length. Please check that the FIPS code is inputted correctly according to the above syntax, and input it again: "))
 
 def findOMBcode1 (end_col):
     '''
@@ -167,11 +196,16 @@ for i in range(len(locdata)):
     ## this part of the code extracts and processes the participant's location 
     # information (e.g. ZIP, FIPS) from locdata for use:
     
-    try:
-        uid = locdata.iloc[i, 0]
-        ZIP = int(locdata.iloc[i, 4])  ## need to convert to int to drop .0
-        FIPS1 = locdata.iloc[i, 9]
+    uid = locdata.iloc[i, 0]
 
+    try:
+        ZIP = int(locdata.iloc[i, 4])  ## need to convert to int to drop .0
+    except ValueError:   # accounts for location value = NaN
+        continue
+
+    try:  
+        FIPS1 = locdata.iloc[i, 9]
+    
         if len(str(locdata.iloc[i, 9])) >= 11:
             FIPS2 = str(FIPS1)[0:5]             ## need to first convert to str to extract first 4-5 numbers
         else:         
@@ -188,7 +222,7 @@ for i in range(len(locdata)):
     # for each participant and adds the corresponding rural-urban codes to RUdata:
 
     findgeneralRUcode(RUCA1, "''ZIP_CODE''", 3, str(ZIP), 1)    ## adds RUCA (corresponding to ZIP) into col 1
-    findRUCAcode (2)                                            ## adds RUCA (corresponding to full FIPS) into col 2
+    findRUCAcode(2)                                            ## adds RUCA (corresponding to full FIPS) into col 2
     findgeneralRUcode(RUCC, "FIPS", 4, np.int64(FIPS2), 4)      ## adds RUCC (corresponding to basic FIPS) into col 4
     findgeneralRUcode(NCHS, "FIPS code", 6, np.int64(FIPS2), 6) ## adds NCHS (corresponding to basic FIPS) into col 6
     findgeneralRUcode(UIC, "FIPS", 4, np.int64(FIPS2), 10)      ## adds UIC (corresponding to basic FIPS) into col 10
