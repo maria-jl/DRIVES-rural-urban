@@ -14,8 +14,7 @@ With this objective in mind, this project repository is divided into three main 
 
 **driving correlations (preprocessing)**
 
-5. rural urban_driving summary (driving data --> overall driving summaries for each participant, where each row has participant uid, overall RU code, and the values for various overall driving behaviours)
-5. [a] skmob attribute finder (driving data --> skmob-obtained driving summaries, e.g. no. unique locations and radius of gyration)  
+5. rural urban_driving summary (driving data --> overall driving summaries for each participant, where each row has participant uid, overall RU code, and the values for various overall driving behaviours) *and* skmob attribute finder (driving data --> skmob-obtained driving summaries, e.g. no. unique locations and radius of gyration)  
 6. rural urban_driving correlations (rural urban_driving summary --> plots of possible RU/driving correlations)  
 
 **driving correlations (machine learning)**  
