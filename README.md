@@ -7,22 +7,27 @@ With this objective in mind, this project repository is divided into three main 
 
 **rural urban coding (preprocessing)**
 
-1. homelocationfinder (trip end lat/long --> home lat/long/address)  
+1. homelocationfinder (trip end lat/long --> home lat/long/address [v1] or intermediate addresses file --> complete home lat/long/address file [v2])  
 2. address to LOC extractor (home lat/long/address --> various location info, e.g. ZIP, FIPS, city, county, etc)  
 3. LOC to RU codes convertor (location info --> various RU codes, e.g. RUCA, RCC, UIC)  
+4. RU codes to RU class convertor (various RU codes --> corresponding three-level classes, e.g. RUCA_class, & final codes "RUCA_ru" and "other_ru")
 
 **driving correlations (preprocessing)**
 
-4. rural urban_driving summary (driving data --> overall driving summaries for each participant, where each row has participant uid, overall RU code, and the values for various overall driving behaviours)  
-5. rural urban_ driving correlations (rural urban_driving summary --> plots of possible RU/driving correlations)  
+5. rural urban_driving summary (driving data --> overall driving summaries for each participant, where each row has participant uid, overall RU code, and the values for various overall driving behaviours)  
+5a. skmob attribute finder (driving data --> skmob-obtained driving summaries, e.g. no. unique locations and radius of gyration)  
+6. rural urban_driving correlations (rural urban_driving summary --> plots of possible RU/driving correlations)  
 
 **driving correlations (machine learning)**  
 
-6. TBD
+7. rural urban_driving MODELS (rural urban_driving correlations --> machine learning models that attempt to predict an individual's class (rural, urban) from their overall driving patterns)
+
+
+NOTE: Most of these Python files flow directly from one another (e.g. the address file generated in step <1> is directly used in step <2>, without any processing in between). However, a few steps required manual processing: namely, the choice of version of homelocationfinder in <2>, the manual creation of the "overall RU code" column in 'participant _ruralurbancodes.csv' based on "RUCA_ru" and "other_ru" columns, and the addition of skmob driving summaries from 'ruralurban_skmob summary.csv' to 'ruralurban_driving summary.csv' prior to visualizations in <6>.
 
 ## Data
 
-The data used in this project was obtained from the DRIVES study at Washington University. It is comprised mostly of data obtained from GPS loggers in participant cars, thus including information collected every 30s while driving (e.g. vehicle speed, vehicle acceleration, vehicle latitude and longitude), as well as trip information (e.g. whether the trip was during the day or the night). Two datasets were combined for use in this project, due to the low number of participants that were found to be classified as rural: a dataset with participants mostly from the Greater St. Louis area in Missouri and Illinois (n = 246), and a second dataset with participants from North Carolina (n = 36). Since each dataset is structured slightly differently, with somewhat different driving information, they are used both together and seperately in this project.
+The data used in this project was obtained from the DRIVES study at Washington University. It is comprised mostly of data obtained from GPS loggers in participant cars, thus including information collected every 30s while driving (e.g. vehicle speed, vehicle acceleration, vehicle latitude and longitude), as well as trip information (e.g. whether the trip was during the day or the night). Two datasets were combined for use in this project, due to the low number of participants that were found to be classified as rural: the 'main' dataset with participants mostly from the Greater St. Louis area in Missouri and Illinois (STL, n = 246), and a second dataset with participants from North Carolina (NC, n = 36). Since each dataset is structured slightly differently, with somewhat different driving information, they are used both together and seperately in this project. For the final stages of the project (e.g. machine learning models), only the main dataset was used; this decision was made to ensure consistency because some different driving/rurality trends were observed between the NC and STL datsets at step <6>, and because we cannot be sure that all driving metrics were obtained or even defined in the same way for both datasets.
 
 
 ## Rural-urban classifications
@@ -141,10 +146,10 @@ This classification takes into account measures of population density, urbanizat
 
 In this project, like many other research studies, I defined metro and micro classification as "urban", with everything else being "rural." From the classifications for each code type, I then developed three overarching rural-urban classifications:
 
-*RUCA_ru (14R)* --- based on RUCA (from state-county-tract FIPS) classifications: rural (RUCA_class = micro or rural) or urban (RUCA_class = metro)
+*RUCA_ru (9R)* --- based on RUCA (from state-county-tract FIPS) classifications: rural (RUCA_class = micro or rural) or urban (RUCA_class = metro)
 
-*other_ru (11R)* --- based on all codes other than RUCA (RUCC, NCHS, OMB, UIC) as we found that all these codes agreed based on the definition of rurality and urbanicity as: rural (classes = micro, rural, nonmetro, or neither) or urban (classes = metro)
+*other_ru (5R)* --- based on all codes other than RUCA (RUCC, NCHS, OMB, UIC) as we found that all these codes agreed based on the definition of rurality and urbanicity as: rural (classes = micro, rural, nonmetro, or neither) or urban (classes = metro)
 
-*overall (15R)* --- As the ultimate classification chosen for this project, a binary code of rural or urban was assigned to each participant based on firstly RUCA_ru and secondly other_ru (since RUCA codes are based on smaller/more precise locations as well as encompass a perhaps wider and more encompassing definition of rurality and urbanicity). In other words, for most participants where RUCA_ru and other_ru did not match, RUCA_ru was chosen as the code; except for two cases where the RUCA code was one point away from being categorized into the opposite class, in which case the other_ru was chosen as the code. 
+*overall (8R)* --- As the ultimate classification chosen for this project, a binary code of rural or urban was assigned to each participant based on firstly RUCA_ru and secondly other_ru (since RUCA codes are based on smaller/more precise locations as well as encompass a perhaps wider and more encompassing definition of rurality and urbanicity). In other words, for most participants where RUCA_ru and other_ru did not match, RUCA_ru was chosen as the code; except for one case where the RUCA code was one point away from being categorized into the opposite class, in which case the other_ru was chosen as the code. 
 
-NOTE: R represents the number of participants classified as rural, out of the entire dataset of 285 participants with driving data.
+NOTE: R represents the number of participants classified as rural, within the main/STL dataset of 246 participants with driving data.
