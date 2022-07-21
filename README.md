@@ -1,7 +1,7 @@
 # DRIVES-rural-urban
 
 ## Objective
-This repository includes work from my summer 2020 research project. The objective of this project is to investigate the impact of location of residence (urban/suburban/rural) on daily driving behaviour among older adults. This research will then be linked to emerging machine learning models to predict the presence of preclinical Alzheimer disease (AD) from naturalistic driving patterns captured by GPS data.
+This repository includes work from my summer 2022 research project. The objective of this project is to investigate the impact of location of residence (urban/suburban/rural) on daily driving behaviour among older adults. This research will then be linked to emerging machine learning models to predict the presence of preclinical Alzheimer disease (AD) from naturalistic driving patterns captured by GPS data.
 
 With this objective in mind, this project repository is divided into three main areas:
 
