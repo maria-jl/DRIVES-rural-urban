@@ -149,7 +149,7 @@ In this project, like many other research studies, I defined metro and micro cla
 
 *other_ru (5R)* --- based on all codes other than RUCA (RUCC, NCHS, OMB, UIC) as we found that all these codes agreed based on the definition of rurality and urbanicity as: rural (classes = micro, rural, nonmetro, or neither) or urban (classes = metro)
 
-*overall (8R)* --- As the ultimate classification chosen for this project, a binary code of rural or urban was assigned to each participant based on firstly RUCA_ru and secondly other_ru (since RUCA codes are based on smaller/more precise locations as well as encompass a perhaps wider and more encompassing definition of rurality and urbanicity). In other words, for most participants where RUCA_ru and other_ru did not match, RUCA_ru was chosen as the code; except for one case where the RUCA code was one point away from being categorized into the opposite class, in which case the other_ru was chosen as the code. 
+*overall (8R)* --- As the ultimate classification chosen for this project, a binary code of rural or urban was assigned to each participant based on firstly RUCA_ru and secondly other_ru (since RUCA codes are based on smaller/more precise locations as well as encompass a perhaps wider and more encompassing definition of rurality and urbanicity). In other words, for participants where RUCA_ru and other_ru did not match, RUCA_ru was chosen as the code; except for one case where the RUCA code was one point away from being categorized into the opposite class, in which case the other_ru was chosen as the code. 
 
 **NOTE:** R represents the number of participants classified as rural, within the main/STL dataset of 246 participants with driving data.
 
